@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Slots</title>
+  <style>
+    :root {
+      --bg: #070b18;
+      --surface: rgba(255,255,255,0.08);
+      --accent: #f5b400;
+      --accent-soft: #ffc65d;
+      --text: #f1f3f8;
+      --muted: #a9b0c3;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(circle at top, rgba(245,180,0,0.12), transparent 30%),
+                  linear-gradient(180deg, #0f172a 0%, #070b18 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.35rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    nav a {
+      color: var(--muted);
+      margin-left: 26px;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    nav a:hover {
+      color: var(--text);
+    }
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 90px 32px 60px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-copy h1 {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      margin: 0;
+      line-height: 0.95;
+    }
+    .hero-copy p {
+      margin: 24px 0 32px;
+      max-width: 610px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 16px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #f5b400, #ff9f1c);
+      color: #08111f;
+      box-shadow: 0 14px 40px rgba(245,180,0,0.18);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    .hero-visual {
+      position: relative;
+      min-height: 420px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(245,180,0,0.15), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1592878905589-4c7230c85bc7?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      opacity: 0.32;
+      mix-blend-mode: screen;
+    }
+    .hero-visual-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 32px;
+      z-index: 1;
+      text-align: center;
+    }
+    .hero-visual-inner .card {
+      background: rgba(7,11,24,0.88);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 26px;
+      border-radius: 22px;
+      width: min(100%, 340px);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+    .hero-visual-inner .card p {
+      margin: 0;
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+    .hero-visual-inner .stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero-visual-inner .stats span {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 14px 20px;
+      min-width: 120px;
+    }
+    .section {
+      padding: 72px 32px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .section-heading h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+    .grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .card-feature {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 26px;
+      padding: 28px;
+      min-height: 10px;
+    }
+    .card-feature h3 {
+      margin-top: 0;
+      margin-bottom: 0px;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .card-feature p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .highlight {
+      color: var(--accent);
+    }
+    .banner {
+      margin: 60px 0;
+      background: linear-gradient(135deg, rgba(245,180,0,0.18), rgba(58,138,255,0.12));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 38px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      color: var(--text);
+    }
+    .banner p {
+      margin: 0;
+      color: var(--text);
+      max-width: 620px;
+      line-height: 1.8;
+    }
+    .footer {
+      padding: 40px 32px 60px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .footer small {
+      display: block;
+      margin-top: 16px;
+    }
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .banner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Royal Slots</div>
+    <nav>
+      <a href="#games">Games</a>
+      <a href="#features">Features</a>
+      <a href="#join">Join</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <h1>Play bold. Win big. Experience the thrill.</h1>
+        <p>Step into Royal Slots for instant jackpots, hign winrate ever, and exclusive bonuses. Enjoy the best online casino games with fast payouts and premium rewards.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="document.getElementById('join').scrollIntoView({ behavior: 'smooth' })">Start Playing</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('games').scrollIntoView({ behavior: 'smooth' })">Explore Games</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-visual-inner">
+          <div class="card">
+            <p>100% Signup Bonus</p>
+             </div>
+             <div class="card">
+            <p>100% Referral Bonus</p>
+            </div>
+            <div class="card">
+            <p>$3 Freeplay Available</p>
+            
+           </div>
+
+           <div class="stats">
+            
+            <span>24/7 Live Support</span>
+            <span>Instant Withdrawals</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="section-heading">
+        <div>
+          <h2>AVAILABLE PLATFORMS</h2>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card-feature">
+          <h3>Orion Star</h3>
+           </article>
+        <article class="card-feature">
+          <h3>Firekirin</h3>
+         
+        </article>
+        <article class="card-feature">
+          <h3>Milkyway</h3>
+                </article>
+<article class="card-feature">
+          <h3>Juwa</h3>
+                </article>
+
+<article class="card-feature">
+          <h3>Vb-link</h3>
+                </article>
+
+<article class="card-feature">
+          <h3>Ultrapanda</h3>
+                </article>
+
+<article class="card-feature">
+          <h3>Pandamaster</h3>
+                </article>
+
+<article class="card-feature">
+          <h3>Lasvegassweeps</h3>
+                </article>
+
+<article class="card-feature">
+          <h3>Gamevault</h3>
+                </article>
+
+<article class="card-feature">
+          <h3>Gameroom</h3>
+                </article>
+
+<article class="card-feature">
+          <h3>Yolo</h3>
+                </article>
+
+<article class="card-feature">
+          <h3>Mafia</h3>
+                </article>
+
+
+    </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <h2>PAYMENT METHODS</h2>
+        </div>
+        </div>
+<div class="grid">
+    <article class="card-feature">
+      <h3>Chime</h3>
+     </article>
+
+    <article class="card-feature">
+      <h3>Cashapp</h3>
+     </article>
+
+    <article class="card-feature">
+      <h3>Googlepay</h3>
+     </article>
+
+    <article class="card-feature">
+      <h3>Applepay</h3>
+     </article>
+
+     
+</div>
+</section>
+
+
+    <section class="section" id="features">
+      <div class="section-heading">
+        <div>
+          <h2>Why Choose Royal Slots</h2>
+        </div>
+        </div>
+      <div class="grid">
+        <article class="card-feature">
+          <h3>Fast Payouts</h3>
+          <p>Withdraw your winnings quickly with multiple payment methods, including e-wallets and crypto-friendly options.</p>
+        </article>
+        <article class="card-feature">
+          <h3>Safe & Secure</h3>
+          <p>Advanced encryption and full regulatory compliance keep your account and funds protected at all times.</p>
+        </article>
+        <article class="card-feature">
+          <h3>Bonus</h3>
+          <p>Everyday new bonus progaram will be ongoing on our platform. Regular player can claim 30%-50% regular deposit bonus, Loyal players treated as royal. </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="banner" id="join">
+      <div>
+        <h2 style="margin:0;">Ready to join the action?</h2>
+        <p>Click the join button it will refer you to our official gaming facebook page then Dm us for account setup. 24/7 support</p>
+      </div>
+      <a href="https://www.facebook.com/profile.php?id=61591264243165" <button class="btn btn-primary">Join Now</button>> </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Royal Slots is your one-stop destination for premium online casino entertainment.</p>
+    <small>© 2026 Royal Slots. Play responsibly.</small>
+  </footer>
+</body>
+</html>
